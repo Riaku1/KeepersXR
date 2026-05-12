@@ -1,13 +1,55 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Globe } from 'lucide-react';
+import { ChevronRight, Globe, Leaf } from 'lucide-react';
 import Link from 'next/link';
 
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX / window.innerWidth - 0.5,
+        y: e.clientY / window.innerHeight - 0.5,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+
+      {/* Background Parallax Elements */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-0"
+        animate={{
+          x: mousePosition.x * -20,
+          y: mousePosition.y * -20,
+        }}
+        transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+      >
+        <Leaf className="absolute top-[20%] left-[10%] w-32 h-32 text-[#004d40] opacity-20 -rotate-45" />
+        <Leaf className="absolute top-[40%] right-[15%] w-48 h-48 text-[#00251a] opacity-30 rotate-12" />
+        <Leaf className="absolute bottom-[20%] left-[25%] w-24 h-24 text-[#004d40] opacity-15 rotate-90" />
+      </motion.div>
+
+      {/* Foreground Parallax Elements */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-20"
+        animate={{
+          x: mousePosition.x * 40,
+          y: mousePosition.y * 40,
+        }}
+        transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+      >
+        <Leaf className="absolute -bottom-10 -left-10 w-64 h-64 text-dark-900 opacity-90 rotate-[30deg] drop-shadow-[0_0_15px_rgba(0,210,255,0.2)]" />
+        <Leaf className="absolute -top-10 -right-10 w-56 h-56 text-dark-900 opacity-90 -rotate-[120deg] drop-shadow-[0_0_15px_rgba(176,38,255,0.2)]" />
+      </motion.div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
