@@ -44,14 +44,25 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden relative">
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden relative group">
               <Image
                 src="https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                 alt="VR Experience in Nature"
                 fill
-                className="object-cover transform hover:scale-105 transition-transform duration-700"
+                className="object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent"></div>
+              {/* Neon Tint Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-neon-purple/40 to-neon-blue/20 mix-blend-overlay group-hover:opacity-50 transition-opacity duration-700"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent"></div>
+
+              {/* Swaying Foliage */}
+              <motion.div
+                className="absolute -top-10 -right-10 pointer-events-none"
+                animate={{ rotate: [-5, 5, -5] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Leaf className="w-32 h-32 text-dark-900 drop-shadow-[0_0_10px_rgba(0,210,255,0.3)]" />
+              </motion.div>
             </div>
             {/* Decorative element */}
             <div className="absolute -bottom-6 -left-6 glass-panel p-6 rounded-2xl w-48 shadow-2xl border border-white/10">

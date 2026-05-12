@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Store, GraduationCap, Megaphone } from 'lucide-react';
+import { Store, GraduationCap, Megaphone, Leaf } from 'lucide-react';
 
 const services = [
   {
@@ -74,13 +74,32 @@ const Services = () => {
                 {service.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-gray-400 text-sm leading-relaxed relative z-10">
                 {service.description}
               </p>
+
+              {/* Card Leaf Decoration */}
+              <motion.div
+                className="absolute -bottom-6 -right-6 pointer-events-none z-0 opacity-20"
+                animate={{ rotate: [-2, 2, -2] }}
+                transition={{ duration: 4 + index, repeat: Infinity, ease: "easeInOut" }}
+              >
+                 <Leaf className={`w-24 h-24 ${index % 2 === 0 ? 'text-neon-purple' : 'text-neon-blue'}`} />
+              </motion.div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Section Vine Decoration */}
+      <motion.div
+        className="absolute top-0 right-0 pointer-events-none opacity-30 z-0"
+        animate={{ rotate: [-1, 1, -1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transformOrigin: 'top right' }}
+      >
+        <Leaf className="w-64 h-64 text-[#004d40] rotate-[135deg] drop-shadow-[0_0_20px_rgba(0,210,255,0.1)]" />
+      </motion.div>
     </section>
   );
 };

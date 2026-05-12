@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Film, Check, ArrowUpRight, Play } from 'lucide-react';
+import { Film, Check, ArrowUpRight, Play, Leaf } from 'lucide-react';
 import Image from 'next/image';
 
 const Projects = () => {
@@ -69,10 +69,24 @@ const Projects = () => {
                 View Project Details <ArrowUpRight className="w-4 h-4" />
               </button>
             </div>
-            <div className="relative min-h-[400px]">
+            <div className="relative min-h-[400px] overflow-hidden">
               <Image src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Forest VR Concept" fill className="absolute inset-0 object-cover" />
+
+              {/* Neon Tint Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/30 to-[#004d40]/40 mix-blend-overlay"></div>
+
               <div className="absolute inset-0 bg-gradient-to-r from-dark-800 to-transparent lg:block hidden"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
+
+              {/* Swaying Foliage */}
+              <motion.div
+                className="absolute -bottom-8 -left-8 pointer-events-none z-10"
+                animate={{ rotate: [-3, 3, -3] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Leaf className="w-40 h-40 text-dark-900 drop-shadow-[0_0_15px_rgba(176,38,255,0.4)] rotate-45" />
+              </motion.div>
+
+              <div className="absolute inset-0 flex items-center justify-center z-20">
                 <button className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 hover:scale-110 transition-transform cursor-pointer group">
                   <Play className="w-8 h-8 text-white fill-white ml-1 group-hover:text-neon-blue transition-colors" />
                 </button>
